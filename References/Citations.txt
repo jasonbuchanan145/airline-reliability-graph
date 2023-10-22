@@ -1,0 +1,9 @@
+Dittrich, J., &amp; Quiané-Ruiz, J.-A. (2012). Efficient Big Data Processing in Hadoop MapReduce, 5(12), 2014–2015. doi:10.14778/2367502.2367562 
+
+Ghazi, M. R., &amp; Gangodkar, D. (2015). Hadoop, mapreduce and HDFS: A developers perspective. Hadoop, MapReduce and HDFS: A Developers Perspective, 48. doi:10.1016/j.procs.2015.04.108
+ 
+Pippal, S., Shukla, A., &amp; Kushwaha, D. S. (2014a). Implementation of Distributed Searching and Sorting Using Hadoop MapReduce. doi:10.1145/2677855.2677932 
+
+Pippal, S., Shukla, A., &amp; Kushwaha, D. S. (2014b). Implementation of Distributed Searching and Sorting Using Hadoop MapReduce. doi:10.1145/2677855.2677932 
+
+Zhang, Y. (2013). An Optimized Mapreduce Runtime for Multi-Core Systems. doi:10.1145/2508075.2514875 
