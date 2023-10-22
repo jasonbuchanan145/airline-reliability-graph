@@ -1,6 +1,9 @@
 # HPC
 
 ## TODO
+### Proposal
+google doc https://docs.google.com/document/d/10UGqmwzwMYYr8GQrXeMW4NitfeeLIBd1T3N0JhH92yo/edit?usp=sharing 
+Workflow pdf, see "resources" directory, it is editable here https://app.diagrams.net/#Hjasonbuchanan145%2FHPC%2Fmain%2Fresources%2Fworkflow.drawio
 ### ENV SETUP
    1) Install Java 17
    2) Install Intellij Community
