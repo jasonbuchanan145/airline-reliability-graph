@@ -4,9 +4,10 @@ services:
   db:
     image: mysql:latest
     environment:
-      MYSQL_ROOT_PASSWORD: 0B1g1VIpLFVo
+      MYSQL_ROOT_PASSWORD: root
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - ./database/initial_script.sql:/docker-entrypoint-initdb.d/init.sql
       - ./database/T_ONTIME_MARKETING.csv:/var/lib/mysql-files/T_ONTIME_MARKETING.csv
+      - ./database/L_UNIQUE_CARRIERS.csv:/var/lib/mysql-files/L_UNIQUE_CARRIERS.csv
