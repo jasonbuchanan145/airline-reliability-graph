@@ -31,6 +31,7 @@ CREATE TABLE uniqueCarrierMapping(
 	op_unique_carrier varchar(10),
 	op_carrier_name varchar(300)
 );
+
  CREATE TABLE airlineAirportData (
     id INT NOT NULL AUTO_INCREMENT,
     origin VARCHAR(10),
@@ -59,6 +60,7 @@ ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
 
+-- This file is a lookup sheet and required manual work in excel to clean it up, mostly by removing parentheses from carrier names when there were duplicates and let the duplicates happen so we can aggregate based on all carriers. For example American Airlines (1) and America Airlines (2) is the same parent company so we should make them the same for our group bys by removing the parentheses and numbers. In so doing excel changed the line endings and the encoding ever so slightly when compared to the other csv that didn't require work 
 LOAD DATA INFILE '/var/lib/mysql-files/L_UNIQUE_CARRIERS.csv'
 IGNORE
 INTO TABLE uniqueCarrierMapping
@@ -66,10 +68,15 @@ FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n';
 
--- We want the arrival and departure information to be null when the flight is cacanceled. 
-update flightDetailsRaw set dep_time = null, dep_delay_new=null, arr_time=null, arr_delay=null where cancelled=1;
+-- We want the arrival and departure information to be null when the flight is cancelled. 
+UPDATE flightDetailsRaw 
+SET dep_time = null, dep_delay_new=null, arr_time=null, arr_delay=null 
+WHERE cancelled=1;
 
-update flightDetailsRaw aw set arr_delay = 0 where arr_delay<0; 
+-- flights shown as early are set as negative numbers, we don't want that
+UPDATE flightDetailsRaw 
+SET arr_delay = 0 
+WHERE arr_delay<0; 
 
 -- aggregate the data. This will serve as our graph bases for hbase
 INSERT INTO airlineAirportData
