@@ -2,7 +2,7 @@ create database HPC;
 use HPC;
 
 -- creates the databse table
- CREATE TABLE flightdetailsraw (
+ CREATE TABLE flightDetailsRaw (
     fl_date VARCHAR(20),
     mkt_carrier_fl_num INT,
     op_unique_carrier VARCHAR(10),
@@ -27,34 +27,32 @@ use HPC;
     cancelled TINYINT
 );
 
-CREATE TABLE uniquecarriermapping(
+CREATE TABLE uniqueCarrierMapping(
 	op_unique_carrier varchar(10),
-	op_carrier_name varchar(100)
-
- CREATE TABLE flightdetailsparsed (
-    unix_time_flight BIGINT,
-    mkt_carrier_fl_num INT,
-    op_unique_carrier VARCHAR(10),
+	op_carrier_name varchar(300)
+);
+ CREATE TABLE airlineAirportData (
+    id INT NOT NULL AUTO_INCREMENT,
     origin VARCHAR(10),
     origin_city_name VARCHAR(100),
     origin_state_abr VARCHAR(10),
+    carrier_name VARCHAR(300),
     dest VARCHAR(10),
     dest_city_name VARCHAR(100),
     dest_state_abr VARCHAR(10),
-    arr_time BIGINT,
-    arr_delay INT,
-    cancelled TINYINT,
-    avg_delay_arrival_airline FLOAT,
-    avg_canceled_airline FLOAT,
-    unix_time_arrival BIGINT,
-    unix_time_departure BIGINT,
-    airline_name VARCHAR(100)
+    percentage_delayed FLOAT,
+    percentage_delayed_longer_than_15 FLOAT,
+    percentage_cancelled FLOAT,
+    avg_delay FLOAT,
+    avg_delay_longer_than_15 FLOAT,
+    num_flights INT,
+    PRIMARY KEY(id)
 );
 
  
 LOAD DATA INFILE '/var/lib/mysql-files/T_ONTIME_MARKETING.csv'
 IGNORE
-INTO TABLE flightdetailsraw
+INTO TABLE flightDetailsRaw
 FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY ''
 ENCLOSED BY '"'
@@ -63,40 +61,42 @@ IGNORE 1 ROWS;
 
 LOAD DATA INFILE '/var/lib/mysql-files/L_UNIQUE_CARRIERS.csv'
 IGNORE
-INTO TABLE uniquecarriermap
+INTO TABLE uniqueCarrierMapping
 FIELDS TERMINATED BY ','
-OPTIONALLY ENCLOSED BY ''
 ENCLOSED BY '"'
-LINES TERMINATED BY '\n'
-IGNORE 1 ROWS;
+LINES TERMINATED BY '\r\n';
 
+-- We want the arrival and departure information to be null when the flight is cacanceled. 
+update flightDetailsRaw set dep_time = null, dep_delay_new=null, arr_time=null, arr_delay=null where cancelled=1;
 
---We want the arrival and departure information to be null when the flight is cacanceled. 
-update flightdetailsraw set dep_time = null, dep_delay_new=null, arr_time=null, arr_delay=null where cancelled=1;
+update flightDetailsRaw aw set arr_delay = 0 where arr_delay<0; 
 
---if the flight is ahead of time just treat it as on time and set it to 0 instead of negative
---in the dataset 100,000 flights were delayed by only 15 minutes or less ( select count(*) from flightdetailsraw where arr_delay > 0 and arr_delay < 15;)
---we don't really care about those, it's 15 minutes, we are more interested in 15 minutes to several hours
-update flightdetailsraw set arr_delay = 0 where arr_delay<15 
+-- aggregate the data. This will serve as our graph bases for hbase
+INSERT INTO airlineAirportData
+    (origin, origin_city_name, origin_state_abr, carrier_name,
+     dest, dest_city_name, dest_state_abr,
+     percentage_delayed, percentage_delayed_longer_than_15, percentage_cancelled, avg_delay, avg_delay_longer_than_15, num_flights)
+SELECT
+    origin, origin_city_name, origin_state_abr, mapping.op_carrier_name AS carrier_name,
+    dest, dest_city_name, dest_state_abr,
+    SUM(CASE WHEN arr_delay > 0 THEN 1 ELSE 0 END) / COUNT(*) AS percentage_delayed,
+    SUM(CASE WHEN arr_delay > 15 THEN 1 ELSE 0 END) / COUNT(*) AS percentage_delayed_longer_than_15,
+    SUM(CASE WHEN cancelled = 1 THEN 1 ELSE 0 END) / COUNT(*) AS percentage_cancelled,
+    AVG(arr_delay) AS avg_delay,
+    SUM(CASE WHEN arr_delay > 15 THEN arr_delay ELSE 0 END) / 
+    -- guard against divide by 0 errors by forcing the denominator to be at least 1 since the numerator will be 0 too it comes to 0
+      CASE 
+        WHEN SUM(CASE WHEN arr_delay > 15 THEN 1 ELSE 0 END) = 0 THEN 1 
+        ELSE SUM(CASE WHEN arr_delay > 15 THEN 1 ELSE 0 END)
+    END AS avg_delays_longer_than_15,
+    COUNT(*) AS num_flights
+FROM
+    flightDetailsRaw fl
+LEFT OUTER JOIN
+    uniqueCarrierMapping mapping ON fl.op_unique_carrier = mapping.op_unique_carrier
+GROUP BY
+    dest, origin, dest_city_name, dest_state_abr, origin_city_name, origin_state_abr, mapping.op_carrier_name;
 
--- this is a nasty bit of sql but we need to convert and add two columns to figure out what time this flight was scheduled to take off, fl date which is the date of the flight and a time that is always midnight and the crs_depart. Based on the documentation CRS depart is in the form of HHMM from midnight of the date of the flight. 
-insert into flightdetailsparsed (unix_time_flight, mkt_carrier_fl_num, origin, origin_city_name, origin_state_abr, dest, dest_city_name, dest_state_abr, arr_time, arr_delay, cancelled) values 
-Select -- this is a nasty bit of sql but we need to convert and add two columns to figure out what time this flight was scheduled to take off, fl date which is the date of the flight and a time that is always midnight and the crs_depart. Based on the documentation CRS depart is in the form of HHMM from midnight of the date of the flight.
-UNIX_TIMESTAMP(STR_TO_DATE(SUBSTRING_INDEX(fl_date, ' ', 1), '%d/%m/%Y'))+((crs_dep_time/100)*3600+(crs_dep_time MOD 100)*60),
-mkt_carrier_fl_num
-origin,
-origin_city_name,
-origin_state_abr,
-dest,
-dest_city_name,
-dest_cit_abr,
---same as above except handle the case of wrapped arrival times (ie took off at 2300 the night before and landed at 300)
-UNIX_TIMESTAMP(STR_TO_DATE(SUBSTRING_INDEX(fl_date, ' ', 1), '%d/%m/%Y'))+((arr_time/100)*3600+(arr_time MOD 100)*60) + CASE 
-	WHEN arr_time<crs_dep_time THEN 86400
-        else 0
-	end,
-arr_delay,
-cancelled,
 
 
 
