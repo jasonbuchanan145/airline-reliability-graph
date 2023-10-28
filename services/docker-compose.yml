@@ -1,7 +1,7 @@
 version: '3.1'
 
 services:
-  db:
+  mysql_db:
     image: mysql:latest
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -11,3 +11,20 @@ services:
       - ./database/initial_script.sql:/docker-entrypoint-initdb.d/init.sql
       - ./database/T_ONTIME_MARKETING.csv:/var/lib/mysql-files/T_ONTIME_MARKETING.csv
       - ./database/L_UNIQUE_CARRIERS.csv:/var/lib/mysql-files/L_UNIQUE_CARRIERS.csv
+
+  hbase:
+    image: harisekhon/hbase
+    ports:
+      - "2181:2181"
+      - "16010:16010"
+
+  hadoop_with_scoop:
+    tty: true
+    image: dvoros/sqoop:latest
+    depends_on:
+      mysql_db:
+        condition: service_started
+      hbase:
+        condition: service_started
+    volumes:
+      -  ./Dependencies/mysql-connector-j.jar:/jdbc/mysql-connector-j.jar
