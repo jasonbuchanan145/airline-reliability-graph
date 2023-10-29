@@ -1,82 +1,82 @@
-<mxfile host="app.diagrams.net" modified="2023-10-21T20:15:09.437Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" etag="q9drr-tatHXszRI1LHjF" version="21.7.2" type="device">
+<mxfile host="app.diagrams.net" modified="2023-10-29T23:51:30.957Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" etag="Ldn4nDWURBjlGk9qlf_a" version="22.0.8" type="github">
   <diagram name="Page-1" id="JJKvroaF8k0bOpbIL52W">
-    <mxGraphModel dx="1185" dy="656" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1423" dy="736" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="ejTTFvZG0yE6dTBXoJbS-35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ejTTFvZG0yE6dTBXoJbS-1" target="ejTTFvZG0yE6dTBXoJbS-29">
+        <mxCell id="ejTTFvZG0yE6dTBXoJbS-35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="ejTTFvZG0yE6dTBXoJbS-1" target="ejTTFvZG0yE6dTBXoJbS-29" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="ejTTFvZG0yE6dTBXoJbS-1" value="Excel sheets" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+        <mxCell id="ejTTFvZG0yE6dTBXoJbS-1" value="Excel sheets" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
           <mxGeometry x="210" y="120" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="ejTTFvZG0yE6dTBXoJbS-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.8;exitY=0.8;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.375;entryY=0.05;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="ejTTFvZG0yE6dTBXoJbS-2" target="ejTTFvZG0yE6dTBXoJbS-1">
+        <mxCell id="ejTTFvZG0yE6dTBXoJbS-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.8;exitY=0.8;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.375;entryY=0.05;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="ejTTFvZG0yE6dTBXoJbS-2" target="ejTTFvZG0yE6dTBXoJbS-1" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="ejTTFvZG0yE6dTBXoJbS-2" value="Transportation department" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="ejTTFvZG0yE6dTBXoJbS-2" value="Transportation department" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="20" y="30" width="120" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="ejTTFvZG0yE6dTBXoJbS-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ejTTFvZG0yE6dTBXoJbS-10" target="ejTTFvZG0yE6dTBXoJbS-13">
+        <mxCell id="ejTTFvZG0yE6dTBXoJbS-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="ejTTFvZG0yE6dTBXoJbS-10" target="ejTTFvZG0yE6dTBXoJbS-13" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="ejTTFvZG0yE6dTBXoJbS-10" value="send data to HBase using sqoop as our database hadoop with query" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+        <mxCell id="ejTTFvZG0yE6dTBXoJbS-10" value="send data to HBase using sqoop as our database" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
           <mxGeometry x="240" y="510" width="110" height="110" as="geometry" />
         </mxCell>
-        <mxCell id="ejTTFvZG0yE6dTBXoJbS-13" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="ejTTFvZG0yE6dTBXoJbS-13" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="170" y="690" width="530" height="350" as="geometry" />
         </mxCell>
-        <mxCell id="ejTTFvZG0yE6dTBXoJbS-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="ejTTFvZG0yE6dTBXoJbS-14" target="ejTTFvZG0yE6dTBXoJbS-18">
+        <mxCell id="ejTTFvZG0yE6dTBXoJbS-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="ejTTFvZG0yE6dTBXoJbS-14" target="ejTTFvZG0yE6dTBXoJbS-18" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="ejTTFvZG0yE6dTBXoJbS-14" value="Create a CLI for this so it reads in origin and destination airport" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="ejTTFvZG0yE6dTBXoJbS-14" value="Create a CLI for this so it reads in origin and destination airport" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="200" y="740" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="ejTTFvZG0yE6dTBXoJbS-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="ejTTFvZG0yE6dTBXoJbS-18" target="ejTTFvZG0yE6dTBXoJbS-20">
+        <mxCell id="ejTTFvZG0yE6dTBXoJbS-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="ejTTFvZG0yE6dTBXoJbS-18" target="ejTTFvZG0yE6dTBXoJbS-20" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="ejTTFvZG0yE6dTBXoJbS-18" value="Run a mapper that looks at all flights from the origin airport to any airport" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="ejTTFvZG0yE6dTBXoJbS-18" value="Run a mapper that looks at all flights from the origin airport to any airport" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="360" y="740" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="ejTTFvZG0yE6dTBXoJbS-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="ejTTFvZG0yE6dTBXoJbS-19" target="ejTTFvZG0yE6dTBXoJbS-21">
+        <mxCell id="ejTTFvZG0yE6dTBXoJbS-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="ejTTFvZG0yE6dTBXoJbS-19" target="ejTTFvZG0yE6dTBXoJbS-21" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="ejTTFvZG0yE6dTBXoJbS-19" value="run a mapper on the returned airline from mapper 1, look for any flight that lands in your target and also takes off within 6 hours of the first flight arriving" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="ejTTFvZG0yE6dTBXoJbS-19" value="run a mapper on the returned airline from mapper 1, look for any flight that lands in your destination" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="185" y="910" width="130" height="110" as="geometry" />
         </mxCell>
-        <mxCell id="ejTTFvZG0yE6dTBXoJbS-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ejTTFvZG0yE6dTBXoJbS-20" target="ejTTFvZG0yE6dTBXoJbS-19">
+        <mxCell id="ejTTFvZG0yE6dTBXoJbS-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="ejTTFvZG0yE6dTBXoJbS-20" target="ejTTFvZG0yE6dTBXoJbS-19" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="ejTTFvZG0yE6dTBXoJbS-20" value="add a property called &quot;Path&quot; and add origin&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="ejTTFvZG0yE6dTBXoJbS-20" value="add a property called &quot;Path&quot; and add origin&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="540" y="740" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="ejTTFvZG0yE6dTBXoJbS-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="ejTTFvZG0yE6dTBXoJbS-21" target="ejTTFvZG0yE6dTBXoJbS-22">
+        <mxCell id="ejTTFvZG0yE6dTBXoJbS-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="ejTTFvZG0yE6dTBXoJbS-21" target="ejTTFvZG0yE6dTBXoJbS-22" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="ejTTFvZG0yE6dTBXoJbS-21" value="Run a reducer that aggregates the path to the most reliable" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="ejTTFvZG0yE6dTBXoJbS-21" value="Run a reducer that aggregates the path of the most reliable" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="360" y="935" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="ejTTFvZG0yE6dTBXoJbS-22" value="Return to user with the least delayed and least canceled" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="ejTTFvZG0yE6dTBXoJbS-22" value="Return to user with the least delayed and least canceled" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="530" y="935" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="ejTTFvZG0yE6dTBXoJbS-23" value="Hadoop" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="ejTTFvZG0yE6dTBXoJbS-23" value="Hadoop" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="480" y="650" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="ejTTFvZG0yE6dTBXoJbS-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ejTTFvZG0yE6dTBXoJbS-29" target="ejTTFvZG0yE6dTBXoJbS-10">
+        <mxCell id="ejTTFvZG0yE6dTBXoJbS-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="ejTTFvZG0yE6dTBXoJbS-29" target="ejTTFvZG0yE6dTBXoJbS-10" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="ejTTFvZG0yE6dTBXoJbS-29" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="ejTTFvZG0yE6dTBXoJbS-29" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="120" y="250" width="370" height="180" as="geometry" />
         </mxCell>
-        <mxCell id="ejTTFvZG0yE6dTBXoJbS-36" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="ejTTFvZG0yE6dTBXoJbS-31" target="ejTTFvZG0yE6dTBXoJbS-32">
+        <mxCell id="ejTTFvZG0yE6dTBXoJbS-36" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="ejTTFvZG0yE6dTBXoJbS-31" target="ejTTFvZG0yE6dTBXoJbS-32" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="ejTTFvZG0yE6dTBXoJbS-31" value="Import raw data into mysql" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="ejTTFvZG0yE6dTBXoJbS-31" value="Import raw data into mysql" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="150" y="290" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="ejTTFvZG0yE6dTBXoJbS-32" value="Pre weight each flight in our graph with GroupBy aggregations and other tools&amp;nbsp;&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="ejTTFvZG0yE6dTBXoJbS-32" value="Pre weight each flight in our graph with GroupBy aggregations and other tools&amp;nbsp;&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="315" y="290" width="130" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="ejTTFvZG0yE6dTBXoJbS-37" value="Mysql" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="ejTTFvZG0yE6dTBXoJbS-37" value="Mysql" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="340" y="210" width="60" height="30" as="geometry" />
         </mxCell>
       </root>
