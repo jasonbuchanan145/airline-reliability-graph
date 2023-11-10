@@ -23,14 +23,17 @@ services:
       dockerfile: SqoopDockerfile
     depends_on:
       - mysql_db
+    ports:
+    - "16010:16010" # Port for HBase Master web UI
+    - "2181:2181"
+    - "9000:9000"
     environment:
       - HBASE_HOME=/opt/hbase
       - CLASSPATH=/jdbc/mysql-connector-j.jar:$CLASSPATH
-    volumes:
-      - ./Dependencies/mysql-connector-j.jar:/usr/local/sqoop/lib/mysql-connector-j.jar
     command: >
       sh -c "
         while ! nc -z mysql_db 3306; do sleep 10; echo 'ping' ; done;
-        sleep 1000;
+        echo 'ready';
+        sleep 100000;
         sqoop import --connect jdbc:mysql://mysql_db:3306/HPC --username root --password root --table airlineAirportData --hbase-table airlines --column-family cf --hbase-create-table --hbase-row-key id"
 
