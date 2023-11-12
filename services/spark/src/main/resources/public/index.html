@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flight Reliability Evaluation System</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<h2>Welcome to ARES</h2>
+<div><p>Please fill out the form below</p></div>
+<form id="routeForm">
+    <label for="origin">Origin:</label>
+    <input type="text" id="origin" name="origin" required><br><br>
+
+    <label for="destination">Destination:</label>
+    <input type="text" id="destination" name="destination" required><br><br>
+
+    <button type="submit" id ="submit">Submit</button>
+    <div id="spinner" class="spinner" style="display: none;">Loading - This can take up to 30 seconds</div>
+</form>
+
+<div id="results">
+    <h3>Least Delayed Direct</h3>
+    <table id="leastDelayedDirect"></table>
+
+    <h3>Least Canceled Direct</h3>
+    <table id="leastCanceledDirect"></table>
+
+    <h3>Least Delayed One Hop</h3>
+    <div>
+        <p>
+            This is ranked as the route that had the lowest percentage of delayed flights for the route
+            when calculating the highest average delay for each flight. For example pdx to atl if it has a layover in denver.
+            It's ranked by the highest percentage of delay for either pdx to den or den to atl
+        </p>
+    </div>
+    <table id="leastDelayedOneHop"></table>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

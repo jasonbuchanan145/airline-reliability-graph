@@ -65,8 +65,10 @@ LOAD DATA INFILE '/var/lib/mysql-files/L_UNIQUE_CARRIERS.csv'
 IGNORE
 INTO TABLE uniqueCarrierMapping
 FIELDS TERMINATED BY ','
+OPTIONALLY ENCLOSED BY ''
 ENCLOSED BY '"'
-LINES TERMINATED BY '\r\n';
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
 
 -- We want the arrival and departure information to be null when the flight is cancelled. 
 UPDATE flightDetailsRaw 
@@ -103,7 +105,3 @@ LEFT OUTER JOIN
     uniqueCarrierMapping mapping ON fl.op_unique_carrier = mapping.op_unique_carrier
 GROUP BY
     dest, origin, dest_city_name, dest_state_abr, origin_city_name, origin_state_abr, mapping.op_carrier_name;
-
-
-
-
