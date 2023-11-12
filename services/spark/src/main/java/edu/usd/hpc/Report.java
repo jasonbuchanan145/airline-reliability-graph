@@ -6,9 +6,12 @@ import java.util.List;
 
 @Data
 public class Report {
-    private List<Flight> leastDelayedOneHop;
-    private Flight leastCanceledOneHop;
-    private List<List<Flight>> mostReliableTwoHop;
-    private List<Flight> mostReliableThreeHop;
-
+    private List<Flight> leastDelayedDirect;
+    private List<Flight> leastCanceledDirect;
+    private List<List<Flight>> leastDelayedOneHop;
+    private List<List<Flight>> leastCanceledOneHop;
+    private long timeForInitalizingTheGraph;
+    private long timeToCalculateDirectRoutes;
+    private long timeToCalculateOneStopRoutes;
+    private long timeToPrepareTheReport;
 }

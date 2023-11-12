@@ -1,0 +1,24 @@
+table, th, td {
+    border: 0.1em solid black;
+    border-collapse: collapse;
+    padding: 1em;
+    text-align: left;
+}
+th {
+    background-color: LightGray;
+}
+.spinner {
+    border: 0.5em solid rgba(0, 0, 0, 0.3);
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    border-left-color: black;
+
+    display: inline-block;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
