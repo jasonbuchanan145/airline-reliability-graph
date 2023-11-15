@@ -19,11 +19,13 @@ document.getElementById("routeForm").addEventListener("submit", function(event){
         .catch(error => {
             console.error('Error:', error)
             document.getElementById('error').textContent ='An error occured with this search. Please try a different origin or destination'+error
+        }).fi
         }).finally(()=>{
             submitButton.disabled = false;
             spinner.style.display = 'none';
         });
 });
+
 
 function renderTimingData(data){
 
@@ -35,6 +37,7 @@ function renderTimingData(data){
     +data.timeToCalculateOneStopRoutes+data.timeToPrepareTheReport)/1000;
 
 }
+
 function populateTable(tableId, routes) {
     const table = document.getElementById(tableId);
     // clear the table
@@ -43,7 +46,6 @@ function populateTable(tableId, routes) {
         table.innerHTML = '<tr><td>No data available</td></tr>';
         return;
     }
-
     if(tableId == "leastDelayedOneHop"){
         let headerRow = '<tr><th>Origin</th><th>Layover</th><th>Final Destination</th>'+
         '<th>Carrier</th><th>Avg Delay percentage to layover</th> <th>Avg delay longer than 15 in minutes to layover</th>'

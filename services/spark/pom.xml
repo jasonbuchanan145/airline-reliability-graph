@@ -34,7 +34,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
@@ -112,7 +112,6 @@
             <artifactId>scala-library</artifactId>
             <version>2.12.10</version> <!-- Use the version compatible with your Spark version -->
         </dependency>
-
     </dependencies>
     <build>
         <plugins>

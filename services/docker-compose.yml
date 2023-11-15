@@ -11,3 +11,13 @@ services:
       - ./database/initial_script.sql:/docker-entrypoint-initdb.d/init.sql
       - ./database/T_ONTIME_MARKETING.csv:/var/lib/mysql-files/T_ONTIME_MARKETING.csv
       - ./database/L_UNIQUE_CARRIERS.csv:/var/lib/mysql-files/L_UNIQUE_CARRIERS.csv
+
+  maven-build:
+    image: maven:3.9-amazoncorretto-8
+    working_dir: /usr/src/mymaven
+    volumes:
+      -  ./spark/:/usr/src/mymaven
+    command: >
+      bash -c "mvn clean install && mvn spring-boot:run"
+# docker run -it --rm -v ${PWD}:/usr/src/mymaven -w /usr/src/mymaven maven:3.9-amazoncorretto-8 mvn clean install
+
