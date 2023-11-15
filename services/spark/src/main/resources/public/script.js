@@ -19,7 +19,6 @@ document.getElementById("routeForm").addEventListener("submit", function(event){
         .catch(error => {
             console.error('Error:', error)
             document.getElementById('error').textContent ='An error occured with this search. Please try a different origin or destination'+error
-        }).fi
         }).finally(()=>{
             submitButton.disabled = false;
             spinner.style.display = 'none';
