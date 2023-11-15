@@ -1,7 +1,7 @@
 document.getElementById("routeForm").addEventListener("submit", function(event){
     event.preventDefault();
     const submitButton = document.getElementById("submit");
-    const spinner = document.getElementById("spinner");
+    const spinner = document.getElementById("loadingIndicator");
     submitButton.disabled = true;
     spinner.style='';
     const origin = document.getElementById("origin").value;
@@ -14,13 +14,27 @@ document.getElementById("routeForm").addEventListener("submit", function(event){
             populateTable('leastDelayedDirect', data.leastDelayedDirect);
             populateTable('leastCanceledDirect', data.leastCanceledDirect);
             populateTable('leastDelayedOneHop', data.leastDelayedOneHop);
+            renderTimingData(data)
         })
-        .catch(error => console.error('Error:', error)).finally(()=>{
+        .catch(error => {
+            console.error('Error:', error)
+            document.getElementById('error').textContent ='An error occured with this search. Please try a different origin or destination'+error
+        }).finally(()=>{
             submitButton.disabled = false;
             spinner.style.display = 'none';
         });
 });
 
+function renderTimingData(data){
+
+    document.getElementById("timeForInitializingTheGraph").textContent=data.timeForInitializingTheGraph/1000;
+    document.getElementById("timeToCalculateDirectRoutes").textContent=data.timeToCalculateDirectRoutes/1000;
+    document.getElementById("timeToCalculateOneStopRoutes").textContent=data.timeToCalculateOneStopRoutes/1000;
+    document.getElementById("timeToPrepareTheReport").textContent=data.timeToPrepareTheReport/1000;
+    document.getElementById("totalTime").textContent=(data.timeForInitializingTheGraph+data.timeToCalculateDirectRoutes
+    +data.timeToCalculateOneStopRoutes+data.timeToPrepareTheReport)/1000;
+
+}
 function populateTable(tableId, routes) {
     const table = document.getElementById(tableId);
     // clear the table
@@ -29,8 +43,6 @@ function populateTable(tableId, routes) {
         table.innerHTML = '<tr><td>No data available</td></tr>';
         return;
     }
-
-
 
     if(tableId == "leastDelayedOneHop"){
         let headerRow = '<tr><th>Origin</th><th>Layover</th><th>Final Destination</th>'+

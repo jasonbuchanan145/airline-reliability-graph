@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 @Component
 public class SparkRunner {
 
+
     public Report report(String origin, String dest) {
         Report report = new Report();
         long initializationStart = System.currentTimeMillis();
@@ -44,10 +45,11 @@ public class SparkRunner {
 
         JavaRDD<Edge<Row>> edges = uniqueEdges.values();
         String finalOrigin = origin;
+        List<Edge<Row>> edgesList = edges.collect();
         JavaRDD<Edge<Row>> starting = edges
                 .filter(edge -> edge.attr().getAs("src").equals(finalOrigin));
-        List<Edge<Row>> edgesList = edges.collect();
-        report.setTimeForInitalizingTheGraph(System.currentTimeMillis()-initializationStart);
+
+        report.setTimeForInitializingTheGraph(System.currentTimeMillis()-initializationStart);
 
         String finalDest = dest;
         long timeForDirectStart = System.currentTimeMillis();
@@ -92,9 +94,10 @@ public class SparkRunner {
         long timeToPrepareReport = System.currentTimeMillis();
         List<Flight> leastDelayedDirect = directs.stream().sorted(Comparator.comparing(Flight::getPercentageDelayedLongerThan15).reversed()).collect(Collectors.toList());
         List<List<Flight>> leastDelayedOneHop = oneHopFlights.stream()
-                .sorted(Comparator.comparing(route -> route.stream().max(Comparator.comparingDouble(Flight::getPercentageDelayedLongerThan15)).map(Flight::getPercentageDelayedLongerThan15)
+                .sorted(Comparator.comparing(route -> route.stream().max(Comparator.comparingDouble(Flight::getPercentageDelayedLongerThan15))
+                        .map(Flight::getPercentageDelayedLongerThan15)
                         .get())).collect(Collectors.toList());
-
+        int totalNumberOfFlightsInRoute = oneHopFlights.parallelStream().flatMap(flights -> flights.stream().map(Flight::getNumFlights)).reduce(0,(a,b)->a+b);
         report.setLeastDelayedOneHop(leastDelayedOneHop);
         report.setLeastDelayedDirect(leastDelayedDirect);
         report.setTimeToPrepareTheReport(System.currentTimeMillis()-timeToPrepareReport);
@@ -110,6 +113,7 @@ public class SparkRunner {
         flight.setDestCityName(edge.attr().getAs("dest_city_name"));
         flight.setPercentageDelayedLongerThan15(edge.attr().getAs("percentage_delayed_longer_than_15"));
         flight.setPercentageCancelled(edge.attr().getAs("percentage_cancelled"));
+        flight.setNumFlights(edge.attr().getAs("num_flights"));
         flight.setAvgDelayLongerThan15(edge.attr().getAs("avg_delay_longer_than_15"));
         return flight;
     }
@@ -120,7 +124,7 @@ public class SparkRunner {
         Dataset<Row> edges = dataset.selectExpr("origin as src", "dest as dst", "carrier_name",
                 "origin_city_name",
                 "dest_city_name",
-                "percentage_delayed_longer_than_15", "avg_delay_longer_than_15",
+                "percentage_delayed_longer_than_15", "avg_delay_longer_than_15","num_flights",
                 "percentage_cancelled");
         return new GraphFrame(airports, edges);
     }

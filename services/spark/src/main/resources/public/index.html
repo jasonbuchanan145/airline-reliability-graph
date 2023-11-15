@@ -15,10 +15,25 @@
     <input type="text" id="destination" name="destination" required><br><br>
 
     <button type="submit" id ="submit">Submit</button>
-    <div id="spinner" class="spinner" style="display: none;">Loading - This can take up to 30 seconds</div>
+    <div id = "loadingIndicator" style="display: none;">
+        <span>Loading - This can take up to 30 seconds</span>
+        <div id="spinner" class="spinner" ></div>
+    </div>
 </form>
 
 <div id="results">
+    <h3>Timings</h3>
+    <div id = "timings">
+        <span id = "timingCover">No timing available yet</span>
+        <ul>
+            <li>Time it took to initialize the graph <span id = "timeForInitializingTheGraph"></span></li>
+            <li>Time it took to analyze direct routes the graph <span id = "timeToCalculateDirectRoutes"></span></li>
+            <li>Time it took to analyze routes with a layover <span id = "timeToCalculateOneStopRoutes"></span></li>
+            <li>Time it took to aggregate the objects for the report <span id = "timeToPrepareTheReport"></span></li>
+            <li>Total time <span id = "totalTime"></span></li>
+        </ul>
+    </div>
+
     <h3>Least Delayed Direct</h3>
     <table id="leastDelayedDirect"></table>
 
