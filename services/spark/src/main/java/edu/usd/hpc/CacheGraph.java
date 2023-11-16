@@ -8,6 +8,7 @@ import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 import org.graphframes.GraphFrame;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 import scala.Tuple2;
@@ -15,18 +16,10 @@ import scala.Tuple3;
 
 @Component
 public class CacheGraph {
-    @Cacheable
+    @Autowired
+    Dataset<Row> dataset;
+    @Cacheable(value="edges", key="#root.methodName")
     public JavaRDD<Edge<Row>> getEdges(){
-        SparkSession sparkSession = SparkSession.builder().master("local[*]").appName("hpc").getOrCreate();
-        Dataset<Row> dataset = sparkSession.read().format("jdbc")
-                .format("jdbc")
-                .option("driver", "com.mysql.cj.jdbc.Driver")
-                .option("url", "jdbc:mysql://services-mysqldb-1:3306/HPC")
-                .option("dbtable", "airlineAirportData")
-                .option("user", "root")
-                .option("password", "root")
-                .load();
-
         GraphFrame graphFrame = createGraphFrame(dataset);
         Graph<Row, Row> graphx = graphFrame.toGraphX();
         JavaRDD<Edge<Row>> edgesPossibleDuplicates = graphx.edges().toJavaRDD();
