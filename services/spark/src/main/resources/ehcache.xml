@@ -24,7 +24,8 @@
 
         <resources>
             <heap unit="entries">2</heap>
-            <offheap unit="MB">1000</offheap>
+            <!--way larger than we would ever reasonably need but just in case-->
+            <offheap unit="MB">100</offheap>
         </resources>
     </cache>
 
