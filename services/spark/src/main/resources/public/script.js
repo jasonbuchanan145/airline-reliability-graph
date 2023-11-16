@@ -18,10 +18,12 @@ document.getElementById("routeForm").addEventListener("submit", function(event){
         })
         .catch(error => {
             console.error('Error:', error)
-            document.getElementById('error').textContent ='An error occured with this search. Please try a different origin or destination'+error
+            document.getElementById('error').textContent ='An error occurred with this search. Please try a different origin or destination'+error
         }).finally(()=>{
             submitButton.disabled = false;
             spinner.style.display = 'none';
+            document.getElementById("timingList").style=''
+            document.getElementById("timingCover").style='display:none'
         });
 });
 
