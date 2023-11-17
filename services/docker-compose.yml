@@ -13,6 +13,10 @@ services:
       - ./database/L_UNIQUE_CARRIERS.csv:/var/lib/mysql-files/L_UNIQUE_CARRIERS.csv
     networks:
       - hpc_network
+    healthcheck:
+      test: ["CMD-SHELL", "exit | mysql -h localhost -P 3306 -u root -p$$MYSQL_ROOT_PASSWORD" ]
+      timeout: 10s
+      retries: 10
 
   spring_app:
     build:
@@ -21,7 +25,8 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - mysqldb
+      mysqldb:
+        condition: service_healthy
     networks:
       - hpc_network
 
