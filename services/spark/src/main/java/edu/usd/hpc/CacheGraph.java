@@ -7,6 +7,7 @@ import org.apache.spark.graphx.Graph;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
+import org.apache.spark.storage.StorageLevel;
 import org.graphframes.GraphFrame;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -14,14 +15,18 @@ import org.springframework.stereotype.Component;
 import scala.Tuple2;
 import scala.Tuple3;
 
+import java.util.List;
+
 @Component
 public class CacheGraph {
     @Autowired
     Dataset<Row> dataset;
-    @Cacheable(value="edges", key="#root.methodName")
+  //  @Cacheable(value="edges", key="#root.methodName")
     public JavaRDD<Edge<Row>> getEdges(){
+
         GraphFrame graphFrame = createGraphFrame(dataset);
         Graph<Row, Row> graphx = graphFrame.toGraphX();
+
         JavaRDD<Edge<Row>> edgesPossibleDuplicates = graphx.edges().toJavaRDD();
 //define a key of origin, dest, and carrier_name
         JavaPairRDD<Tuple3<Object, Object,String>, Edge<Row>> pairEdges = edgesPossibleDuplicates.mapToPair(edge ->
@@ -39,5 +44,10 @@ public class CacheGraph {
                 "percentage_delayed_longer_than_15", "avg_delay_longer_than_15","num_flights",
                 "percentage_cancelled");
         return new GraphFrame(airports, edges);
+    }
+
+    @Cacheable(value="collect", key="#root.methodName")
+    public List<Edge<Row>> collect(JavaRDD<Edge<Row>> edges) {
+        return edges.collect();
     }
 }

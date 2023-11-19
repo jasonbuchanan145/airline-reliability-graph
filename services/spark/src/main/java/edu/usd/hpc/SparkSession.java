@@ -18,6 +18,7 @@ public class SparkSession {
                 .option("url", "jdbc:mysql://services-mysqldb-1:3306/HPC")
                 .option("dbtable", "airlineAirportData")
                 .option("user", "root")
-                .option("password", "root").load();
+                .option("password", "root").load().cache();
+
     }
 }

@@ -28,5 +28,28 @@
             <offheap unit="MB">100</offheap>
         </resources>
     </cache>
+    <cache alias="collect">
+        <key-type>java.lang.String</key-type>
+        <value-type>java.util.List</value-type>
+        <expiry>
+            <ttl unit="hours">30</ttl>
+        </expiry>
+
+        <listeners>
+            <listener>
+                <class>edu.usd.hpc.CacheEventLogger</class>
+                <event-firing-mode>ASYNCHRONOUS</event-firing-mode>
+                <event-ordering-mode>UNORDERED</event-ordering-mode>
+                <events-to-fire-on>CREATED</events-to-fire-on>
+                <events-to-fire-on>EXPIRED</events-to-fire-on>
+            </listener>
+        </listeners>
+
+        <resources>
+            <heap unit="entries">2</heap>
+            <!--way larger than we would ever reasonably need but just in case-->
+            <offheap unit="MB">100</offheap>
+        </resources>
+    </cache>
 
 </config>

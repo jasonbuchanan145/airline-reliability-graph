@@ -24,7 +24,11 @@ public class SparkRunner {
 
     @Autowired
     public SparkRunner(@Autowired CacheGraph cacheGraph){
-        cacheGraph.getEdges();
+        //throw away the results because we just want to load the cache managed by spring
+        //this is done in this service because with the cachegraph being autowired it goes through spring
+        //beans as opposed to just a method reference so the @Cachable is respected.
+        JavaRDD<Edge<Row>> temp = cacheGraph.getEdges();
+        cacheGraph.collect(temp);
         this.cacheGraph = cacheGraph;
     }
 
@@ -35,7 +39,7 @@ public class SparkRunner {
         dest = dest.toUpperCase();
         JavaRDD<Edge<Row>> edges = cacheGraph.getEdges();
         String finalOrigin = origin;
-        List<Edge<Row>> edgesList = edges.collect();
+        List<Edge<Row>> edgesList = cacheGraph.collect(edges);
         JavaRDD<Edge<Row>> starting = edges
                 .filter(edge -> edge.attr().getAs("src").equals(finalOrigin));
 
