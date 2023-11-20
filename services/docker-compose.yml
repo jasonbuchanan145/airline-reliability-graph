@@ -18,17 +18,17 @@ services:
       timeout: 10s
       retries: 10
 
-  spring_app:
-    build:
-      context: ./spark
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
-    depends_on:
-      mysqldb:
-        condition: service_healthy
-    networks:
-      - hpc_network
+#  spring_app:
+#    build:
+#      context: ./spark
+#      dockerfile: Dockerfile
+#    ports:
+#      - "8080:8080"
+#    depends_on:
+#      mysqldb:
+#        condition: service_healthy
+#    networks:
+#      - hpc_network
 
 networks:
   hpc_network:
