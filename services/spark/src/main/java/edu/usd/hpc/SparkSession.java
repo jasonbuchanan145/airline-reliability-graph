@@ -15,9 +15,10 @@ public class SparkSession {
         return sparkSession.read().format("jdbc")
                 .format("jdbc")
                 .option("driver", "com.mysql.cj.jdbc.Driver")
-                .option("url", "jdbc:mysql://localhost:3307/HPC")
+                .option("url", "jdbc:mysql://services-mysqldb-1:3306/HPC")
                 .option("dbtable", "airlineAirportData")
                 .option("user", "root")
-                .option("password", "root").load();
+                .option("password", "root").load().cache();
+
     }
 }

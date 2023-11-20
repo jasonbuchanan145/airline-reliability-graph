@@ -22,23 +22,19 @@
 </form>
 
 <div id="results">
-    <h3>Timings</h3>
+    <h3>Timings and report</h3>
     <div id = "timings">
         <span id = "timingCover">No timing available yet</span>
         <ul id = "timingList" style="display:none">
-            <li>Time it took to initialize the graph <span id = "timeForInitializingTheGraph"></span></li>
-            <li>Time it took to analyze direct routes the graph <span id = "timeToCalculateDirectRoutes"></span></li>
-            <li>Time it took to analyze routes with a layover <span id = "timeToCalculateOneStopRoutes"></span></li>
-            <li>Time it took to aggregate the objects for the report <span id = "timeToPrepareTheReport"></span></li>
-            <li>Total time <span id = "totalTime"></span></li>
+            <li>Time it took to analyze direct routes the graph <span id = "timeToCalculateDirectRoutes"></span> seconds</li>
+            <li>Time it took to analyze routes with a layover <span id = "timeToCalculateOneStopRoutes"></span> seconds </li>
+            <li>Total time <span id = "totalTime"></span> seconds</li>
         </ul>
     </div>
 
     <h3>Least Delayed Direct</h3>
     <table id="leastDelayedDirect"></table>
 
-    <h3>Least Canceled Direct</h3>
-    <table id="leastCanceledDirect"></table>
 
     <h3>Least Delayed One Hop</h3>
     <div>
