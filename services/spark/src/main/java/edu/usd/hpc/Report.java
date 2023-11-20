@@ -11,5 +11,6 @@ public class Report {
     private long timeToCalculateDirectRoutes;
     private long timeToCalculateOneStopRoutes;
     private long totalTime;
+    private int numberOfFlightsDirect;
     private int numberOfFlightsEvaluatedOneHop;
 }

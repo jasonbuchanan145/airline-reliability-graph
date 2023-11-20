@@ -12,7 +12,6 @@ document.getElementById("routeForm").addEventListener("submit", function(event){
         .then(response => response.json())
         .then(data => {
             populateTable('leastDelayedDirect', data.leastDelayedDirect);
-            populateTable('leastCanceledDirect', data.leastCanceledDirect);
             populateTable('leastDelayedOneHop', data.leastDelayedOneHop);
             renderTimingData(data)
         })

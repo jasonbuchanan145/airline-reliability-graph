@@ -14,11 +14,9 @@ public class SparkRunner {
 
     private final CacheGraph cacheGraph;
 
+    //overly paranoid of a service autowiring to another service, make a custom constructor to make a circular dependency fail fast
     @Autowired
     public SparkRunner(@Autowired CacheGraph cacheGraph){
-        //throw away the results because we just want to load the cache managed by spring
-        //this is done in this service because with the cachegraph being autowired it goes through spring
-        //beans as opposed to just a method reference so the @Cachable is respected.
         this.cacheGraph = cacheGraph;
     }
 
@@ -27,11 +25,16 @@ public class SparkRunner {
         Report report = new Report();
         origin = origin.toUpperCase();
         dest = dest.toUpperCase();
-        GraphFrame graphFrame = cacheGraph.getGf();
+        GraphFrame graphFrame = cacheGraph.getGraphFrame();
+        //start with directs
         long startDirect = System.currentTimeMillis();
         List<Flight> directs = makeDirect(graphFrame,origin,dest);
         report.setLeastDelayedDirect(directs);
+        report.setNumberOfFlightsDirect(directs.parallelStream().map(Flight::getNumFlights).reduce(0, Integer::sum));
         report.setTimeToCalculateDirectRoutes(System.currentTimeMillis()-startDirect);
+
+
+        //start with one layover routes
         long startLayover=System.currentTimeMillis();
         List<List<Flight>> layovers = makeOneHop(graphFrame,origin,dest);
         report.setTimeToCalculateOneStopRoutes(System.currentTimeMillis()-startLayover);
@@ -52,7 +55,7 @@ public class SparkRunner {
 
 
     private List<Flight> makeDirect(GraphFrame graphFrame, String origin, String dest) {
-        //please see comments for this in makeOneHops in this file, it's the same concept.
+        //please see comments for this in makeOneHop in this file, it's the same concept.
         String[] selectExp = makeSelect(graphFrame,0);
         return graphFrame.find("(a)-[e1]->(b)")
                 .filter(String.format("e1.src = '%s' and e1.dst = '%s'",origin,dest))

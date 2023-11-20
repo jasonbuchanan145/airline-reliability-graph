@@ -1,7 +1,6 @@
 package edu.usd.hpc;
 
 import lombok.Getter;
-import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.graphx.Edge;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
@@ -14,15 +13,13 @@ import java.util.List;
 @Component
 public class CacheGraph {
     Dataset<Row> dataset;
+
     @Getter
-    private List<Edge<Row>> edgeListMemBroadcast;
-    @Getter
-    private GraphFrame gf;
+    private GraphFrame graphFrame;
 
     CacheGraph(@Autowired Dataset<Row> dataset){
         this.dataset=dataset;
         initGraphFrame();
-       // collect(edges);
     }
     private void initGraphFrame(){
 
@@ -31,7 +28,7 @@ public class CacheGraph {
         Dataset<Row> uniqueVerts = graphFrame.vertices().dropDuplicates("id");
         GraphFrame fixup = GraphFrame.apply(uniqueVerts,uniqueEdge);
         //spark caching to persist the graphframe in memory to speed up access
-        this.gf = fixup.cache();
+        this.graphFrame = fixup.cache();
     }
     private GraphFrame createGraphFrame(Dataset<Row> dataset) {
         Dataset<Row> airports = dataset.selectExpr("origin as id").distinct().union(dataset.selectExpr("dest as id").distinct());
