@@ -93,10 +93,6 @@ public class SparkRunner {
                                 .orElse(0.0)))
 
                 .collect(Collectors.toList());
-        //reverse the collection for displaying the most reliable route first,
-        // this could have been done in the sort above but made the code very hard to read and any performance hit should be negligible
-        // since the result set is already aggregated into fixed routes it's not looping over every flight, rather just the routes.
-        Collections.reverse(layovers);
         return layovers;
     }
 
