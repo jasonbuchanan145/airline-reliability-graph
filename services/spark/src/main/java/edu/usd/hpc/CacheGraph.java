@@ -30,6 +30,7 @@ public class CacheGraph {
         Dataset<Row> uniqueEdge = graphFrame.edges().dropDuplicates("src","carrier_name", "dst");
         Dataset<Row> uniqueVerts = graphFrame.vertices().dropDuplicates("id");
         GraphFrame fixup = GraphFrame.apply(uniqueVerts,uniqueEdge);
+        //spark caching to persist the graphframe in memory to speed up access
         this.gf = fixup.cache();
     }
     private GraphFrame createGraphFrame(Dataset<Row> dataset) {

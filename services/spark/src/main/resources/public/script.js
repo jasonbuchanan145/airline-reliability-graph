@@ -30,12 +30,9 @@ document.getElementById("routeForm").addEventListener("submit", function(event){
 
 function renderTimingData(data){
 
-    document.getElementById("timeForInitializingTheGraph").textContent=data.timeForInitializingTheGraph/1000;
     document.getElementById("timeToCalculateDirectRoutes").textContent=data.timeToCalculateDirectRoutes/1000;
     document.getElementById("timeToCalculateOneStopRoutes").textContent=data.timeToCalculateOneStopRoutes/1000;
-    document.getElementById("timeToPrepareTheReport").textContent=data.timeToPrepareTheReport/1000;
-    document.getElementById("totalTime").textContent=(data.timeForInitializingTheGraph+data.timeToCalculateDirectRoutes
-    +data.timeToCalculateOneStopRoutes+data.timeToPrepareTheReport)/1000;
+    document.getElementById("totalTime").textContent=data.totalTime/1000;
 
 }
 
