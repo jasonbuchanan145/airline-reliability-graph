@@ -33,7 +33,7 @@
 </form>
 
 <div id="results">
-    <h3>Timings and report</h3>
+    <h3>Timings</h3>
     <div id = "timings">
         <span id = "timingCover">No timing available yet</span>
         <ul id = "timingList" style="display:none">
@@ -42,17 +42,21 @@
             <li>Total time <span id = "totalTime"></span> seconds.
         </ul>
     </div>
-
+    <div>
+        <p>For direct and one layover we only count a delay to be a flight that lands 15 minutes after it was scheduled to land since
+            we are more interested in finding airports that have long delays, not a bunch of 5 minute delays since that doesn't really
+            affect the traveller</p>
+    </div>
     <h3>Least Delayed Direct</h3>
     <table id="leastDelayedDirect"></table>
 
 
-    <h3>Least Delayed One Hop</h3>
+    <h3>Least Delayed One Layover</h3>
     <div>
         <p>
             This is ranked as the route that had the lowest percentage of delayed flights for the route
-            when calculating the highest average delay for each flight. For example pdx to atl if it has a layover in denver.
-            It's ranked by the highest percentage of delay for either pdx to den or den to atl
+            when calculating the highest average delay for each flight. For example pdx to atl if it has a layover in den.
+            It's ranked by the highest percentage of delay for either pdx to den or den to atl.
         </p>
     </div>
     <table id="leastDelayedOneHop"></table>

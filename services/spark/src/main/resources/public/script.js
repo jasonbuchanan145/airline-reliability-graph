@@ -67,9 +67,10 @@ function populateTable(tableId, routes) {
         return;
     }
     if(tableId == "leastDelayedOneHop"){
-        let headerRow = '<tr><th>Origin</th><th>Layover</th><th>Final Destination</th>'+
-        '<th>Carrier</th><th>Delay percentage to layover</th><th>Percentage canceled to layover</th><th>Average delay longer than 15 in minutes to layover</th><th>Number of flights to the layover</th> '
-        + '<th>Percentage canceled to final</th><th>Delay percentage to final</th> <th>Average delay longer than 15 in minutes to final</th><th>Number of flights to final</th>'
+        let headerRow = '<tr><th>Origin</th><th>Layover</th><th>Final destination</th>'+
+        '<th>Carrier</th><th>Delay percentage to layover</th><th>Percentage canceled to layover</th>'+
+        '<th>Average delay to layover</th><th>Number of flights to the layover</th> '
+        + '<th>Percentage canceled to final</th><th>Delay percentage to final</th> <th>Average delay to final</th><th>Number of flights to final</th>'
         '</tr>';
         table.innerHTML = headerRow;
         routes.forEach(route => {
@@ -91,8 +92,8 @@ function populateTable(tableId, routes) {
         });
     }else{
          let headerRow = '<tr><th>Origin</th><th>Final Destination</th>'+
-            '<th>Carrier</th><th>Percentage Delayed</th>'+
-            '<th>Average delay longer than 15</th><th>Percentage canceled</th><th>Number of flights</th>'+
+            '<th>Carrier</th><th>Percentage delayed</th>'+
+            '<th>Average delay</th><th>Percentage canceled</th><th>Number of flights</th>'+
              '</tr>';
                 table.innerHTML = headerRow;
                 routes.forEach(flight => {
