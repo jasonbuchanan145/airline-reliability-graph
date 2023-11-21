@@ -26,9 +26,32 @@ document.getElementById("routeForm").addEventListener("submit", function(event){
         });
 });
 
+document.addEventListener('DOMContentLoaded',initializeOriginDropDown)
+document.addEventListener('DOMContentLoaded',initializeDestDropDown)
+
+function initializeOriginDropDown(){
+    fetch('/origins')
+            .then(response => response.json())
+            .then(data => populateDatalist('origin-options', data))
+}
+
+function initializeDestDropDown(){
+    fetch('/destinations')
+            .then(response => response.json())
+            .then(data => populateDatalist('dest-options', data))
+}
+
+function populateDatalist(datalistId, options) {
+    const datalist = document.getElementById(datalistId);
+    datalist.innerHTML = '';
+    options.forEach(option => {
+        const opt = document.createElement('option');
+        opt.value = option;
+        datalist.appendChild(opt);
+    });
+}
 
 function renderTimingData(data){
-
     document.getElementById("timeToCalculateDirectRoutes").textContent=data.timeToCalculateDirectRoutes/1000;
     document.getElementById("timeToCalculateOneStopRoutes").textContent=data.timeToCalculateOneStopRoutes/1000;
     document.getElementById("totalTime").textContent=data.totalTime/1000;
@@ -44,9 +67,10 @@ function populateTable(tableId, routes) {
         return;
     }
     if(tableId == "leastDelayedOneHop"){
-        let headerRow = '<tr><th>Origin</th><th>Layover</th><th>Final Destination</th>'+
-        '<th>Carrier</th><th>Avg Delay percentage to layover</th> <th>Avg delay longer than 15 in minutes to layover</th>'
-        + '<th>Avg delay percentage to final</th> <th>Avg delay longer than 15 in minutes to final</th>'
+        let headerRow = '<tr><th>Origin</th><th>Layover</th><th>Final destination</th>'+
+        '<th>Carrier</th><th>Delay percentage to layover</th><th>Percentage canceled to layover</th>'+
+        '<th>Average delay to layover</th><th>Number of flights to the layover</th> '
+        + '<th>Percentage canceled to final</th><th>Delay percentage to final</th> <th>Average delay to final</th><th>Number of flights to final</th>'
         '</tr>';
         table.innerHTML = headerRow;
         routes.forEach(route => {
@@ -56,24 +80,33 @@ function populateTable(tableId, routes) {
                     <td>${route[1].dest}</td>
                     <td>${route[0].carrierName}</td>
                     <td>${route[0].percentageDelayedLongerThan15}</td>
+                    <td>${route[0].percentageCancelled}</td>
                     <td>${route[0].avgDelayLongerThan15}</td>
+                    <td>${route[0].numFlights}</td>
+                    <td>${route[1].percentageCancelled}
                     <td>${route[1].percentageDelayedLongerThan15}</td>
                     <td>${route[1].avgDelayLongerThan15}</td>
+                    <td>${route[1].numFlights}</td>
                 </tr>`;
                 table.innerHTML += row;
         });
     }else{
-    //it's a direct route, no need for fancy parsing
-        const headers = Object.keys(routes[0]);
-        let headerRow = '<tr>';
-        headers.forEach(header => headerRow += `<th>${header}</th>`);
-        headerRow += '</tr>';
-        table.innerHTML = headerRow;
-        routes.forEach(flight => {
-            let row = '<tr>';
-            headers.forEach(header => row += `<td>${JSON.stringify(flight[header])}</td>`);
-            row += '</tr>';
-            table.innerHTML += row;
-        });
+         let headerRow = '<tr><th>Origin</th><th>Final Destination</th>'+
+            '<th>Carrier</th><th>Percentage delayed</th>'+
+            '<th>Average delay</th><th>Percentage canceled</th><th>Number of flights</th>'+
+             '</tr>';
+                table.innerHTML = headerRow;
+                routes.forEach(flight => {
+                    let row = `<tr>
+                            <td>${flight.origin}</td>
+                            <td>${flight.dest}</td>
+                            <td>${flight.carrierName}</td>
+                            <td>${flight.percentageDelayedLongerThan15}</td>
+                            <td>${flight.avgDelayLongerThan15}</td>
+                             <td>${flight.percentageCancelled}</td>
+                            <td>${flight.numFlights}</td>
+                        </tr>`;
+                        table.innerHTML += row;
+                });
     }
 }

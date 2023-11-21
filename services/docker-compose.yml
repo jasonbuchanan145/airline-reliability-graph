@@ -24,6 +24,7 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
+      - "4040:4040"
     depends_on:
       mysqldb:
         condition: service_healthy
