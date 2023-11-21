@@ -6,13 +6,24 @@
 </head>
 <body>
 <h2>Welcome to ARES</h2>
-<div><p>Please fill out the form below</p></div>
+<div><p>Please fill out the form below selecting an option from the dropdowns. Values are not case-sensitive.</p>
+    <p>The first time you run this it will be much slower (about 30 seconds) than it will the second time and in subsequent queries because spark's graphframe requires code generation that runs
+    on the first run. On subsequent runs, even with different airports, it will reuse generated code and better utilize cache.
+    </p>
+</div>
 <form id="routeForm">
+    <p>The options for origin and destination are populated with all airports available, which includes small regional airports
+        that aren't very interesting because there aren't many flights.
+        The airport code of larger airports yield more interesting results.
+        For example setting  JFK, SEA, ATL, ORD, LAX, MIA, DEN, PHX, PDX etc</p>
     <label for="origin">Origin:</label>
-    <input type="text" id="origin" name="origin" required><br><br>
+    <input type="text" id="origin" name="origin" list="origin-options" required><br><br>
+    <datalist id = "origin-options"></datalist>
 
     <label for="destination">Destination:</label>
-    <input type="text" id="destination" name="destination" required><br><br>
+
+    <input type="text" id="destination" name="destination" list="dest-options" required><br><br>
+    <datalist id = "dest-options"></datalist>
 
     <button type="submit" id ="submit">Submit</button>
     <div id = "loadingIndicator" style="display: none;">
@@ -26,9 +37,9 @@
     <div id = "timings">
         <span id = "timingCover">No timing available yet</span>
         <ul id = "timingList" style="display:none">
-            <li>Time it took to analyze direct routes the graph <span id = "timeToCalculateDirectRoutes"></span> seconds</li>
+            <li>Time it took to analyze direct routes <span id = "timeToCalculateDirectRoutes"></span> seconds</li>
             <li>Time it took to analyze routes with a layover <span id = "timeToCalculateOneStopRoutes"></span> seconds </li>
-            <li>Total time <span id = "totalTime"></span> seconds</li>
+            <li>Total time <span id = "totalTime"></span> seconds.
         </ul>
     </div>
 

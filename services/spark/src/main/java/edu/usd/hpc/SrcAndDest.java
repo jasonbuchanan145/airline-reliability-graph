@@ -11,13 +11,11 @@ import java.util.List;
 public class SrcAndDest {
     @Autowired
     JdbcTemplate jdbcTemplate;
-    //get the origins from  the db. Cache the response in memory so we don't have to query everytime
-    @Cacheable("origins")
+
     List<String> getOrigins(){
-        return jdbcTemplate.queryForList("select distinct origin from airlineAirportData",String.class);
+        return jdbcTemplate.queryForList("select distinct origin from airlineAirportData order by origin",String.class);
     }
-    @Cacheable("destination")
     List<String> getDestinations(){
-        return jdbcTemplate.queryForList("select distinct dest from airlineAirportData",String.class);
+        return jdbcTemplate.queryForList("select distinct dest from airlineAirportData order by dest",String.class);
     }
 }

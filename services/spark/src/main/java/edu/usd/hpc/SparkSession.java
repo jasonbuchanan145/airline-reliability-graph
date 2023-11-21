@@ -2,12 +2,10 @@ package edu.usd.hpc;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@EnableCaching
 public class SparkSession {
     @Bean(name = "dataset")
     public Dataset<Row> dataset() {
